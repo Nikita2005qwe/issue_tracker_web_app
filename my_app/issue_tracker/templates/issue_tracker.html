@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/main_page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/modal_styles.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка -->
+        <div class="header">
+            <h1>Добро пожаловать, {{ user.username }}!</h1>
+            <button class="logout-button" onclick="location.href='{% url 'authorization:profile' %}'">Выйти</button>
+        </div>
+
+        <!-- Кнопка добавления задачи -->
+        <button class="add-task-button" id="openAddTaskModalButton">Добавить задачу</button>
+        <button class="add-task-button" id="openCreateSectionModalButton">Создать новый раздел</button>
+
+        <!-- Раздел с задачами -->
+
+        {% for section in sections %}
+        <div class="section">
+            <h2>{{ section.title }}</h2>
+            <!-- Задачи в секции -->
+            <table class="tasks-table">
+
+                <tbody>
+                    {% for task in section.task_set.all %}
+                    <tr class="task-row" data-task-id="{{ task.id }}">
+                        <td><button class="favorite-btn" data-task-id="{{ task.id }}">+</button></td>
+                        <td>{{ task.title }}</td>
+                        <td><button class="complete-btn" data-task-id="{{ task.id }}">Выполнить</button></td>
+                        <td><button class="delete-btn" data-task-id="{{ task.id }}">Удалить</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Модальное окно для подтверждения удаления -->
+    <div id="deleteTaskModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Вы уверены?</h2>
+            <p>Вы действительно хотите удалить задачу "<span id="taskTitleForDelete"></span>"?</p>
+            <form id="deleteTaskForm" method="post" action="{% url 'issue_tracker:delete_task' %}">
+                {% csrf_token %}
+                <input type="hidden" id="taskIdInput" name="task_id" value="">
+                <button type="submit" class="confirm-button">Удалить</button>
+                <button type="button" id="cancelDeleteButton" class="cancel-button">Отмена</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно для добавления задач -->
+    <div id="addTaskModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Добавить задачу</h2>
+            <form id="addTaskForm" method="post" action="{% url 'issue_tracker:add_task' %}">
+                {% csrf_token %}
+
+                <label for="taskTitleForAdd">Название задачи:</label>
+                <input type="text" id="taskTitleForAdd" name="title" required>
+
+                <!-- Поле для отметки о важности -->
+                <label for="isImportant">Важная задача:</label>
+                <input type="checkbox" id="isImportant" name="is_important">
+
+                <!-- Поле для выбора секции -->
+                <label for="sectionSelect">Секция:</label>
+                <select id="sectionSelect" name="section_id" required>
+                    <option value="">Выберите секцию</option>
+                    {% for section in sections %}
+                        <option value="{{ section.id }}">{{ section.title }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit" class="confirm-button">Добавить</button>
+                <button type="button" id="cancelAddTaskButton" class="cancel-button">Отмена</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // Получаем элементы модального окна
+        const deleteModal = document.getElementById('deleteTaskModal');
+        const cancelDeleteButton = document.getElementById('cancelDeleteButton');
+        const taskIdInput = document.getElementById('taskIdInput');
+        const taskTitleForDelete = document.getElementById('taskTitleForDelete');
+
+        // Открытие модального окна при нажатии на кнопку "Удалить"
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const taskId = this.getAttribute('data-task-id'); // Получаем ID задачи
+                const taskRow = document.querySelector(`.task-row[data-task-id="${taskId}"]`); // Находим строку задачи
+                const taskCell = taskRow.querySelector('td:nth-child(2)');
+                if (!taskCell) {
+                    console.error('Ячейка с названием задачи не найдена');
+                    return;
+                }
+                const taskName = taskCell.textContent;
+                //const taskName = taskRow.querySelector('td:nth-child(2)').textContent;  Получаем название задачи
+
+                taskIdInput.value = taskId; // Устанавливаем ID задачи в скрытое поле формы
+                taskTitleForDelete.textContent = taskName; // Устанавливаем название задачи в модальное окно
+                deleteModal.style.display = 'block'; // Показываем модальное окно
+            });
+        });
+
+        // Закрытие модального окна при нажатии на "Отмена"
+        cancelDeleteButton.addEventListener('click', function () {
+            deleteModal.style.display = 'none'; // Скрываем модальное окно
+        });
+
+        document.getElementById('openAddTaskModalButton').addEventListener('click', function () {
+            document.getElementById('addTaskModal').style.display = 'block';
+        });
+
+        document.getElementById('cancelAddTaskButton').addEventListener('click', function () {
+            document.getElementById('addTaskModal').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

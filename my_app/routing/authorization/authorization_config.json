@@ -1,0 +1,14 @@
+{
+  "index": {
+    "location_html_page": "index.html",
+    "url_path": "",
+    "requires_login": false,
+    "documentation": "Функция выводит html страницу для начала работы"
+  },
+  "profile": {
+    "location_html_page": "authorization/profile.html",
+    "url_path": "profile",
+    "requires_login": true,
+    "documentation": "Функция выводит html страницу профиля пользователя"
+  }
+}

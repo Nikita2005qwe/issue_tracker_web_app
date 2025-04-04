@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'authorization/css/styles-index.css' %}">
+
+    <title>Главная страница</title>
+</head>
+<body style="background-image: url(media/images/background.jpg)">
+    <header>
+        <nav>
+            <a href="{% url 'authorization:register' %}">Регистрация</a>
+            <a href="{% url 'login' %}">Вход</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Добро пожаловать на наш сайт!</h1>
+            <p>{{ hello_msg }}</p>
+            <button onclick="location.href='{% url 'authorization:profile' %}'">Начните прямо сейчас</button>
+        </section>
+    </main>
+</body>
+</html>

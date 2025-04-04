@@ -1,0 +1,20 @@
+{
+  "main": {
+    "location_html_page": "issue_tracker.html",
+    "url_path": "main",
+    "requires_login": true,
+    "documentation": "Выводит Tasks в главном меню issue tracker application"
+  },
+  "delete_task": {
+    "location_html_page": "issue_tracker.html",
+    "url_path": "delete_task",
+    "requires_login": true,
+    "documentation": "Производит действия для удаления требуемого элемента"
+  },
+  "add_task": {
+    "location_html_page": "issue_tracker.html",
+    "url_path": "add_task",
+    "requires_login": true,
+    "documentation": "Производит действия для добавления нового элемента в модель Task"
+  }
+}
