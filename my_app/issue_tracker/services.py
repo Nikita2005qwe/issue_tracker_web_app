@@ -4,6 +4,7 @@ from common_services.base_services import Context
 from utils.DataBaseObjectsProcessing import DataBaseObjectsProcessing
 from utils.FunctionsUtils import FunctionsUtils
 from issue_tracker.models import TaskSection, Task
+from settings_app.models import UserSettings
 
 
 class IssueTrackerContext(Context):
@@ -50,7 +51,8 @@ class IssueTrackerContext(Context):
 
         ctx = {
             'sections': DataBaseObjectsProcessing.get_objects_owned_by_user(TaskSection, request.user),
-            'tasks': DataBaseObjectsProcessing.get_objects_owned_by_user(Task, request.user)
+            'tasks': DataBaseObjectsProcessing.get_objects_owned_by_user(Task, request.user),
+            "user_settings": DataBaseObjectsProcessing.get_objects_owned_by_user(UserSettings, request.user)[0]
         }
         
         return ctx

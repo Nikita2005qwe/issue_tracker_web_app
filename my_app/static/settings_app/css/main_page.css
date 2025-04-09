@@ -49,8 +49,17 @@ body {
     background-color: #c82333;
 }
 
-/* Кнопка добавления задачи */
-.add-task-button {
+/* Форма */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-check-label {
+    font-size: 16px;
+    color: #333;
+}
+
+.save-button {
     background-color: #28a745;
     color: white;
     border: none;
@@ -58,58 +67,8 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-bottom: 20px;
 }
 
-.add-task-button:hover {
+.save-button:hover {
     background-color: #218838;
-}
-
-/* Секция */
-.section {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.section-header h2 {
-  font-size: 20px;
-  margin: 0;
-}
-
-.complete-btn,
-.delete-btn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-}
-
-.complete-btn {
-  background-color: #28a745;
-}
-
-.complete-btn:hover {
-  background-color: #218838;
-}
-
-.delete-btn:hover {
-  background-color: #c82333;
 }

@@ -1,50 +1,67 @@
-// Получаем элементы DOM
-var modal = document.getElementById("modal");
-var createSectionModal = document.getElementById("createSectionModal");
-var deleteModal = document.getElementById("deleteModal");
+// Получаем элементы модального окна
+const deleteModal = document.getElementById('deleteTaskModal');
+const cancelDeleteButton = document.getElementById('cancelDeleteButton');
 
-var openModalButton = document.getElementById("openModalButton");
-var openCreateSectionModalButton = document.getElementById("openCreateSectionModalButton");
-var openDeleteModalButton = document.getElementById("openDeleteModalButton");
+const taskIdInput = document.getElementById('taskIdInput');
+const taskTitleForDelete = document.getElementById('taskTitleForDelete');
 
-var closeButtons = document.querySelectorAll(".close");
-var overlay = document.getElementById("overlay");
+const openAddTaskModalButton = document.getElementById('openAddTaskModalButton');
+const addTaskModal = document.getElementById('addTaskModal');
+const cancelAddTaskButton = document.getElementById('cancelAddTaskButton');
+
+const userSettingsDiv = document.getElementById('userSettings');
+const isActive = userSettingsDiv.getAttribute('data-is-active'); // Вернет строку
+isActiveBoolean = isActive === "True";
 
 // Функция для открытия модального окна
-function openModal(modalElement) {
-    modalElement.style.display = "block";
-    overlay.style.display = "block";
+function openModal(modalWindow) {
+    modalWindow.style.display = 'flex'; // Показываем модальное окно
 }
 
 // Функция для закрытия модального окна
-function closeModal(modalElement) {
-    modalElement.style.display = "none";
-    overlay.style.display = "none";
+function closeModal(modalWindow) {
+    modalWindow.style.display = 'none'; // Скрываем модальное окно
 }
 
-// Событие для открытия первого модального окна
-openModalButton.addEventListener("click", function() {
-    openModal(modal);
-});
+//console.log(isActiveBoolean);
 
-// Событие для открытия второго модального окна
-openCreateSectionModalButton.addEventListener("click", function() {
-    openModal(createSectionModal);
-});
+// Открытие модального окна или автоматическая отправка формы
+document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const taskId = this.getAttribute('data-task-id'); // Получаем ID задачи
+        const taskRow = document.querySelector(`.task-row[data-task-id="${taskId}"]`); // Находим строку задачи
+        const taskCell = taskRow.querySelector('td:nth-child(2)');
 
-// Событие для открытия модального окна для удаления
-//openDeleteModalButton.addEventListener("click", function() {
-//    openModal(deleteModal);
-//});
+        if (!taskCell) {
+            console.error('Ячейка с названием задачи не найдена');
+            return;
+        }
 
-// Событие для закрытия модальных окон при нажатии на крестик
-closeButtons.forEach(function(closeButton) {
-    closeButton.addEventListener("click", function() {
-        closeModal(modal);
-        closeModal(createSectionModal);
-        closeModal(deleteModal);
+        const taskName = taskCell.textContent;
+
+        // Устанавливаем ID задачи в скрытое поле формы
+        taskIdInput.value = taskId;
+
+        // Проверяем значение isActiveBoolean
+        if (isActiveBoolean) {
+            // Если true, показываем модальное окно
+            taskTitleForDelete.textContent = taskName; // Устанавливаем название задачи в модальное окно
+            openModal(deleteModal);
+        } else {
+            // Если false, отправляем форму автоматически
+            deleteTaskForm.submit();
+        }
     });
 });
 
-// Событие для закрытия модальных окон при клике вне их области
+openAddTaskModalButton.addEventListener('click', function () {
+    openModal(addTaskModal);
+});
 
+document.addEventListener('click', function (event) {
+    // Проверяем, была ли нажата кнопка "Отмена"
+    const modal = event.target.closest('.modal');
+    if ((event.target.classList.contains('cancel-button') || event.target.classList.contains('overlay')) && modal) {
+        closeModal(modal); // Закрываем модальное окно
+    }
+});

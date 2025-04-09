@@ -122,7 +122,8 @@ class ViewUtils:
         """
         dict_of_redirect: dict[str, str] = {
             "/issue_tracker/delete_task": "issue_tracker:main",
-            "/issue_tracker/add_task": "issue_tracker:main"
+            "/issue_tracker/add_task": "issue_tracker:main",
+            "/settings/save": "settings_app:save_settings"
         }
         
         return redirect(dict_of_redirect[path])

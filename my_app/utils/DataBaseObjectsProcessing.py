@@ -51,7 +51,7 @@ class DataBaseObjectsProcessing:
         :param element_id:
         :return:
         """
-        element = model_class.objects.filter(user=user, id=element_id)
+        element = DataBaseObjectsProcessing.get_object_on_id(model_class, user, element_id)
         element.delete()
     
     @staticmethod
@@ -60,10 +60,10 @@ class DataBaseObjectsProcessing:
         Позволяет добавить новый элемент в базу данных.
         Работает для моделей, которые имеют поле user.
         
-        :param dict_of_parametrs:
+        :param dict_of_parametrs: параеметры элемента
         :param model_class: Класс модели Django.
         :param user: Пользователь, который привязан к создаваемому объекту.
-        :param kwargs: Ключевые аргументы, содержащие поля и значения для нового элемента.
+        :param dict_of_parametrs: Ключевые аргументы, содержащие поля и значения для нового элемента.
         :return:
         """
         # Добавляем пользователя в список аргументов
@@ -71,4 +71,17 @@ class DataBaseObjectsProcessing:
 
         # Создаем новый элемент
         model_class.objects.create(**dict_of_parametrs)
-    
+        
+    @staticmethod
+    def update_element(model_class: Type, user: Any, element_id: Any, dict_of_parametrs: dict[str, Any]) -> None:
+        """
+        Позволяет обновить элемент находящийся в базе данных
+        :param element_id: id элемента
+        :param model_class: новые параеметры элемента
+        :param user: Пользователь, который привязан к создаваемому объекту.
+        :param dict_of_parametrs: Ключевые аргументы, содержащие поля и значения для нового элемента.
+        :return:
+        """
+        element = DataBaseObjectsProcessing.get_object_on_id(model_class, user, element_id)
+        element.update(**dict_of_parametrs)
+        
