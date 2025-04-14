@@ -1,0 +1,137 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 800px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Шапка */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+/* Форма */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+    gap: 10px; /* Расстояние между элементами */
+}
+
+.form-check-label {
+    margin-left: 5px; /* Отступ между чекбоксом и текстом */
+    font-size: 16px;
+    color: #333;
+}
+
+/* Стили для группы настроек */
+.setting-group {
+    background-color: #fff; /* фон */
+    border: 1px solid #ddd; /* Серая рамка */
+    border-radius: 8px; /* Закругленные углы */
+    padding: 15px; /* Внутренние отступы */
+    margin-bottom: 20px; /* Отступ снизу */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+/* Заголовок группы настроек */
+.setting-group h3 {
+    margin-top: 0; /* Убираем верхний отступ */
+    margin-bottom: 10px; /* Отступ между заголовком и содержимым */
+    font-size: 18px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+}
+
+/* Каждый чекбокс с текстом */
+.checkbox-item {
+    display: flex; /* Выравнивание чекбокса и текста */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    gap: 10px; /* Расстояние между чекбоксом и текстом */
+}
+
+.save-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+/* Стили для навигации */
+.navigation {
+    display: flex;
+    justify-content: left; /* Равномерное распределение кнопок */
+    gap: 10px; /* Расстояние между кнопками */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.nav-button {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #28a745; /* Зеленая рамка */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Плавные переходы */
+    height: 40px; /* Фиксированная высота */
+    font-size: 16px; /* Размер текста */
+    text-align: center; /* Выравнивание текста по центру */
+    line-height: 20px; /* Для выравнивания текста по вертикали */
+}
+
+.nav-button:hover {
+    background-color: #218838;
+    border: 2px solid #218838; /* Зеленая рамка */
+
+}
+
+/* Активная кнопка */
+.nav-button.active {
+    background-color: white;
+    color: #28a745;
+}

@@ -1,0 +1,36 @@
+/* Стили для кнопки сворачивания/разворачивания */
+.toggle-section-btn {
+    border-radius: 50%;
+    padding: 0.5em;
+    width: 25px; /* Уменьшаем ширину */
+    height: 25px; /* Уменьшаем высоту */
+    border: 2px solid #808080; /* Серый цвет границы */
+    color: #808080; /* Серый цвет текста */
+    position: relative;
+    background-color: transparent; /* Прозрачный фон */
+    cursor: pointer;
+}
+
+.toggle-section-btn:hover {
+    border: 2px solid #808080; /* Серый цвет границы при наведении */
+    background-color: #d3d3d3; /* Светло-серый фон при наведении */
+    color: #ffffff; /* Белый цвет текста при наведении */
+}
+
+.toggle-section-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid #808080; /* Треугольник направлен вниз */
+    transition: transform 0.3s ease;
+}
+
+.toggle-section-btn.collapsed::before {
+    transform: translate(-50%, -50%) rotate(180deg); /* Треугольник направлен вверх */
+}

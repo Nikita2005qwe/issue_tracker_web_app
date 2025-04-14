@@ -1,0 +1,36 @@
+<!-- Раздел с задачами -->
+{% for section in sections %}
+<div class="section" data-section-id="{{ section.id }}">
+    <div class="section-header">
+        <h2>{{ section.title }}</h2>
+
+        <div class="section-actions">
+            <button class="toggle-section-btn"></button>
+            <button class="delete-section-btn" data-section-id="{{ section.id }}"></button>
+        </div>
+    </div>
+    <hr>
+    <!-- Задачи в секции -->
+    <div class="tasks-container">
+        {% for task in section.task_set.all %}
+        <div class="task-row" data-task-id="{{ task.id }}">
+            <div class="task-content">
+                <button class="favorite-btn" data-task-id="{{ task.id }}" onclick="toggleStar()">
+                    <div class="inner-star"></div>
+                </button>
+                <span>{{ task.title }}</span>
+                {% if task.deadline %}
+                    <span class="task-deadline">До: {{ task.deadline|date:"d.m.Y H:i" }}</span>
+                {% else %}
+                    <span class="task-deadline">Срок не установлен</span>
+                {% endif %}
+            </div>
+            <div class="task-actions">
+                <button class="complete-btn" data-task-id="{{ task.id }}">Выполнить</button>
+                <button class="delete-btn" data-task-id="{{ task.id }}">Удалить</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}

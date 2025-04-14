@@ -1,0 +1,34 @@
+/* Контейнер для задач */
+.tasks-container {
+  margin-top: 10px;
+}
+
+/* Строки задач */
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* Отступ между задачами */
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.task-row:last-child {
+  border-bottom: none; /* Убираем разделительную линию для последней задачи */
+  margin-bottom: 2px;
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+}
+
+.task-content span {
+  margin-left: 10px;
+}
+
+/* Кнопки выполнить и удалить (кнопка описание в процессе)*/
+.task-actions {
+  display: flex;
+  gap: 10px; /* Отступ между кнопками выполнить и удалить */
+}

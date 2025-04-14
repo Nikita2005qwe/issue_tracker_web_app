@@ -1,0 +1,29 @@
+<!-- Модальное окно для подтверждения удаления секции -->
+<div id="deleteSectionModal" class="modal" style="display: none;">
+    <div class="overlay" style="display: block;"></div>
+    <div class="modal-content">
+        <h2>Вы уверены?</h2>
+        <p>Вы действительно хотите удалить секцию "<span id="sectionTitleForDelete"></span>"?</p>
+        <form id="deleteSectionForm" method="post" action="{% url 'issue_tracker:delete_task_section' %}">
+            {% csrf_token %}
+            <input type="hidden" id="sectionIdInput" name="section_id" value="">
+            <button type="submit" class="confirm-button">Удалить</button>
+            <button type="button" id="cancelDeleteSectionButton" class="cancel-button"></button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для подтверждения удаления задачи -->
+<div id="deleteTaskModal" class="modal" style="display: none;">
+    <div class="overlay" style="display: block;"></div>
+    <div class="modal-content">
+        <h2>Вы уверены?</h2>
+        <p>Вы действительно хотите удалить задачу "<span id="taskTitleForDelete"></span>"?</p>
+        <form id="deleteTaskForm" method="post" action="{% url 'issue_tracker:delete_task' %}">
+            {% csrf_token %}
+            <input type="hidden" id="taskIdInput" name="task_id" value="">
+            <button type="submit" class="confirm-button">Удалить</button>
+            <button type="button" id="cancelDeleteButton" class="cancel-button"></button>
+        </form>
+    </div>
+</div>

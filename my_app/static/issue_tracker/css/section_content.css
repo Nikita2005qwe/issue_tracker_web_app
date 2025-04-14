@@ -1,0 +1,30 @@
+/* Секция */
+.section {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  padding-bottom: 0px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+/* Стили для заголовка секции */
+.section-header {
+  display: flex;
+  justify-content: space-between; /* Расположение элементов по краям */
+  margin-bottom: 5px;
+}
+
+/* Стили для блока с действиями */
+.section-actions {
+    display: flex;
+    gap: 15px; /* Промежуток между кнопками */
+}
+
+/* Стили для названия секции */
+.section-header h2 {
+  font-size: 20px;
+  margin: 0;
+  font-weight: bold;
+}

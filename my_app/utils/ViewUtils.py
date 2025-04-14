@@ -1,7 +1,8 @@
 from typing import Optional, Any
 from functools import wraps
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from utils.RedirectHelper import RedirectHelper
 
 
 class ViewUtils:
@@ -84,7 +85,7 @@ class ViewUtils:
                 ctx = ViewUtils.get_context(request, get_context_function, requires_login)
                 if request.method == "POST":
                     
-                    return ViewUtils.go_redirect(request.path)
+                    return RedirectHelper.go_redirect(request)
                 
                 return render(request, location_html_page, ctx)
             else:
@@ -107,25 +108,4 @@ class ViewUtils:
             return get_context_function(request=request)
 
         return get_context_function()
-    
-    @staticmethod
-    def go_redirect(path: str):
-        """
-        Прозводит перенаправление обратно на главную страницу
-        
-        Например после удаления задачи,
-        требуется снова вернуться на ту же сраницу
-        где мы были до этого.
-        
-        :param path:
-        :return:
-        """
-        dict_of_redirect: dict[str, str] = {
-            "/issue_tracker/delete_task": "issue_tracker:main",
-            "/issue_tracker/add_task": "issue_tracker:main",
-            "/settings/save": "settings_app:save_settings"
-        }
-        
-        return redirect(dict_of_redirect[path])
-        
         

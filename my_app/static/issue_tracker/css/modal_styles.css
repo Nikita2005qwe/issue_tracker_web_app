@@ -44,33 +44,17 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px; /* Добавляем отступ сверху */
 }
 
 .confirm-button:hover {
     background-color: #c82333;
 }
 
-.cancel-button {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.form-check-label {
+    font-size: 16px;
+    color: #333;
 }
-
-.cancel-button:hover {
-    background-color: #5a6268;
-}
-
-/* Блокировка взаимодействия с фоновыми элементами */
-body.modal-open {
-    overflow: hidden; /* Отключаем прокрутку страницы */
-    pointer-events: none; /* Блокируем клики на фоновых элементах */
-}
-
-
 
 .modal h2 {
     font-size: 20px;
@@ -83,9 +67,10 @@ body.modal-open {
     margin-bottom: 5px;
     font-size: 14px;
     color: #555;
+    gap: 8px; /* Расстояние между чекбоксом и текстом */
 }
 
-.modal input,
+.modal input[type="text"],
 .modal textarea,
 .modal select {
     width: 100%;
@@ -109,14 +94,4 @@ body.modal-open {
 
 .modal button[type="submit"]:hover {
     background-color: #218838;
-}
-
-/* Крестик для закрытия */
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #333;
 }

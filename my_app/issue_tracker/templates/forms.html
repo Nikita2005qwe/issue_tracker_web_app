@@ -1,0 +1,49 @@
+<!-- Модальное окно для добавления задач -->
+<div id="addTaskModal" class="modal" style="display: none;">
+    <div class="overlay" style="display: block;"></div>
+    <div class="modal-content">
+        <h2>Добавить задачу</h2>
+        <button type="button" id="cancelAddTaskButton" class="cancel-button"></button>
+
+        <form id="addTaskForm" method="post" action="{% url 'issue_tracker:add_task' %}">
+            {% csrf_token %}
+
+            <label for="taskTitleForAdd">Название задачи</label>
+            <input type="text" id="taskTitleForAdd" name="title" required>
+
+            <label for="isImportant">
+                <input type="checkbox" id="isImportant" name="is_important"> Важная задача
+            </label>
+
+            <label for="sectionSelect">Секция</label>
+            <select id="sectionSelect" name="section_id" required>
+                <option value="">Выберите секцию</option>
+                {% for section in sections %}
+                    <option value="{{ section.id }}">{{ section.title }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="taskDeadline">Крайний срок выполнения</label>
+            <input type="datetime-local" id="taskDeadline" name="deadline">
+
+            <button type="submit" class="confirm-button">Добавить</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для добавления секций -->
+<div id="addTaskSectionModal" class="modal" style="display: none;">
+    <div class="overlay" style="display: block;"></div>
+    <div class="modal-content">
+        <h2>Добавить секцию</h2>
+        <form id="addTaskSectionForm" method="post" action="{% url 'issue_tracker:add_task_section' %}">
+            {% csrf_token %}
+
+            <label for="taskSectionTitleForAdd">Название секции:</label>
+            <input type="text" id="taskSectionTitleForAdd" name="title" required>
+
+            <button type="submit" class="confirm-button">Добавить</button>
+            <button type="button" id="cancelAddTaskSectionButton" class="cancel-button"></button>
+        </form>
+    </div>
+</div>

@@ -52,11 +52,20 @@ body {
 /* Форма */
 .form-group {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+    gap: 10px; /* Расстояние между элементами */
 }
 
 .form-check-label {
+    margin-left: 5px; /* Отступ между чекбоксом и текстом */
     font-size: 16px;
     color: #333;
+}
+
+.form-group div {
+    display: flex; /* Для выравнивания чекбокса и текста */
+    align-items: center; /* Выравнивание по центру по вертикали */
 }
 
 .save-button {

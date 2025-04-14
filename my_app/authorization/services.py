@@ -1,10 +1,11 @@
 from issue_tracker.models import TaskSection
+from settings_app.models import UserSettings
 from typing import Any
-from common_services.base_services import Context
 from utils.FunctionsUtils import FunctionsUtils
+from utils.DataBaseObjectsProcessing import DataBaseObjectsProcessing
 
 
-class AuthorizationContext(Context):
+class AuthorizationContext:
     """
     Класс содержащий функции для отображения контекста на Главной странице проекта
     """
@@ -47,7 +48,11 @@ class ActionAfterCreatingUsers:
         :param user: зарегистрированный пользователь
         :return:
         """
-        # Создаем секцию "Основные"
-        TaskSection.objects.create(title="Основные", user=user)
-        
+        parametrs = {
+            "title": 'Основные'
+        }
+        DataBaseObjectsProcessing.create_element(TaskSection, user, parametrs)
+
+        parametrs = {}
+        DataBaseObjectsProcessing.create_element(UserSettings, user, parametrs)
         

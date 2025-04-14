@@ -21,7 +21,11 @@ class Task(models.Model):
     is_completed = models.BooleanField(default=False, verbose_name='Отметка о выполнении')
     is_important = models.BooleanField(default=False, verbose_name='Отметка о внесении задачи в раздел важных')
     section_id = models.ForeignKey(TaskSection, on_delete=models.CASCADE)
-    
+
+    # Временные поля
+    time_created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    deadline = models.DateTimeField(null=True, blank=True, verbose_name='Крайний срок выполнения')
+
     # Связь с пользователем
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks', verbose_name='Пользователь')
     

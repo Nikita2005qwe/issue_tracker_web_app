@@ -1,0 +1,52 @@
+/* Стили для кнопки-крестика */
+.cancel-button,
+.delete-section-btn {
+    border-radius: 50%;
+    padding: 0.5em;
+    width: 25px; /* Уменьшаем ширину */
+    height: 25px; /* Уменьшаем высоту */
+    border: 2px solid #808080; /* Серый цвет границы */
+    color: #808080; /* Серый цвет текста */
+    position: relative;
+    background-color: transparent; /* Прозрачный фон */
+    cursor: pointer;
+}
+
+.cancel-button:hover,
+.delete-section-btn:hover {
+    border: 2px solid #808080; /* Серый цвет границы при наведении */
+    background-color: #d3d3d3; /* Светло-серый фон при наведении */
+    color: #ffffff; /* Белый цвет текста при наведении */
+}
+
+.cancel-button::before,
+.delete-section-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 70%;
+    height: 2px;
+    background-color: #808080; /* Первая линия */
+    transition: transform 0.3s ease;
+}
+
+.cancel-button::after,
+.delete-section-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 70%;
+    height: 2px;
+    background-color: #808080; /* Вторая линия */
+    transition: transform 0.3s ease;
+}
+
+.cancel-button {
+  position: absolute; /* Абсолютное позиционирование */
+  top: 18px; /* Отступ сверху */
+  right: 18px; /* Отступ справа */
+}

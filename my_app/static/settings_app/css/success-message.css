@@ -1,0 +1,29 @@
+/* Стили для окна с сообщением */
+.success-message {
+    background-color: #d4edda; /* Зеленое окно */
+    border: 1px solid #c3e6cb; /* Зеленая рамка */
+    border-radius: 5px;
+    padding: 10px 20px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.success-message .message {
+    color: #155724; /* Текст темно-зеленого цвета */
+    font-size: 16px;
+}
+
+.success-message .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #155724; /* Цвет крестика */
+}
+
+.success-message .close-button:hover {
+    color: #0b2e13; /* Темнее при наведении */
+}

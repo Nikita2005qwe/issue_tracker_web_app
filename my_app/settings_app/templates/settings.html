@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Настройки</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'settings_app/css/main_page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'settings_app/css/main_page_new.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'settings_app/css/success-message.css' %}">
+
 
 </head>
 <body>
@@ -15,22 +17,74 @@
             <button class="logout-button" onclick="location.href='{% url 'authorization:profile' %}'">Выйти</button>
         </div>
 
+        <!-- Окно с сообщением об успешном сохранении -->
+        {% if is_saved %}
+        <div class="success-message">
+            <span class="message">{{ save_message }}</span>
+            <button type="button" class="close-button">&times;</button>
+        </div>
+        {% endif %}
+
+        <!-- Навигация -->
+        <div class="navigation">
+            <button class="nav-button active" data-target="warnings">Предупреждения</button>
+            <button class="nav-button" data-target="notifications">Уведомления</button>
+            <button class="nav-button" data-target="datatime">Управление временем</button>
+        </div>
+
+        <!-- Форма -->
         <form method="post" action="{% url 'settings_app:save_settings' %}">
             {% csrf_token %}
-            <div class="form-group">
-                <input
-                        type="checkbox"
-                       id="WarnOnTaskDelete"
-                       name="warn_on_task_delete"
-                       {% if user_settings.warn_on_task_delete %}checked{% endif %}
-                >
-                <label class="form-check-label" for="WarnOnTaskDelete">Предупреждать при удалении задачи</label>
+            <input type="hidden" id="element_id" name="element_id" value="{{ user_settings.id }}">
+            <input type="hidden" id="is_saved" name="is_saved_hidden_field" value="true">
 
-                <input type="hidden" id="element_id" name="element_id" value="{{ user_settings.id }}">
+            <!-- Раздел "Предупреждения" -->
+            <div id="warnings" class="setting-group">
+                <h3>Предупреждения</h3>
+                <div class="checkbox-item">
+                    <input
+                           type="checkbox"
+                           id="WarnOnTaskDelete"
+                           name="warn_on_task_delete"
+                           {% if user_settings.warn_on_task_delete %}checked{% endif %}
+                    >
+                    <label class="form-check-label" for="WarnOnTaskDelete">Предупреждать при удалении задачи</label>
+                </div>
+
+                <div class="checkbox-item">
+                    <input
+                           type="checkbox"
+                           id="WarnOnTaskSectionDelete"
+                           name="warn_on_task_section_delete"
+                           {% if user_settings.warn_on_task_section_delete %}checked{% endif %}
+                    >
+                    <label class="form-check-label" for="WarnOnTaskSectionDelete">Предупреждать при удалении секции</label>
+                </div>
+            </div>
+
+            <!-- Раздел "Уведомления" -->
+            <div id="notifications" class="setting-group" style="display: none;">
+                <h3>Уведомления</h3>
+                <div class="checkbox-item">
+                    <input
+                           type="checkbox"
+                           id="EmailNotifications"
+                           name="email_notifications"
+                           checked
+                    >
+                    <label class="form-check-label" for="EmailNotifications">Отправлять email-уведомления</label>
+                </div>
+            </div>
+
+            <div id="datatime" class="setting-group" style="display: none;">
+                <h3>Дата и время системы</h3>
+                <p>В разработке</p>
             </div>
 
             <button type="submit" class="save-button">Сохранить</button>
         </form>
     </div>
+
+    <script src="{% static 'settings_app/js/scripts.js' %}"></script>
 </body>
 </html>
