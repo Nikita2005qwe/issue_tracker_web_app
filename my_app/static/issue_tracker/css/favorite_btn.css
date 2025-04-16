@@ -46,7 +46,7 @@
 }
 
 /* Активное состояние внутренней звезды */
-.inner-star.active {
+.inner-star.important {
     background-color: yellow; /* Жёлтый фон при активации */
 }
 

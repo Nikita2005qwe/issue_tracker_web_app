@@ -15,8 +15,8 @@
         {% for task in section.task_set.all %}
         <div class="task-row" data-task-id="{{ task.id }}">
             <div class="task-content">
-                <button class="favorite-btn" data-task-id="{{ task.id }}" onclick="toggleStar()">
-                    <div class="inner-star"></div>
+                <button class="favorite-btn" data-task-id="{{ task.id }}">
+                    <div class="inner-star {% if task.is_important %}important{% endif %}"></div>
                 </button>
                 <span>{{ task.title }}</span>
                 {% if task.deadline %}
