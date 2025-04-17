@@ -14,7 +14,20 @@
         <!-- Шапка -->
         <div class="header">
             <h1>Домашняя страница</h1>
-            <button class="logout-button" onclick="location.href='{% url 'login' %}?next=/profile'">Выйти</button>
+            <div class="buttons-container">
+                <button class="gear-button" onclick="location.href='{% url 'settings_app:main_settings_app' %}'">
+                  <div class="icon">
+                    <div class="wheel">
+                        <div class="hole"></div> <!-- Новый элемент для отверстия -->
+                    </div>
+                    <div class="cog"></div>
+                    <div class="cog"></div>
+                    <div class="cog"></div>
+                    <div class="cog"></div>
+                  </div>
+                </button>
+                <button class="logout-button" onclick="location.href='{% url 'login' %}?next=/profile'">Выйти</button>
+            </div>
         </div>
 
         <!-- Приветственное сообщение -->
@@ -27,7 +40,6 @@
             <button class="app-button" onclick="location.href='{% url 'issue_tracker:main' %}'">План задач</button>
             <button class="app-button" onclick="openApp('english-training')">Мой словарь</button>
             <button class="app-button" onclick="openApp('english-training')">Нейро-тест</button>
-            <button class="app-button" onclick="location.href='{% url 'settings_app:main_settings_app' %}'">Настройки</button>
         </div>
 
         <!-- Подвал -->

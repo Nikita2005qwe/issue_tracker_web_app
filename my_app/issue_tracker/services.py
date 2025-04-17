@@ -15,7 +15,7 @@ class IssueTrackerContext:
     @staticmethod
     @FunctionsUtils.register_function("add_task")
     def get_context_after_add_task(request: Any) -> dict[str, Any]:
-        dict_of_parametrs: dict[str, Any] = {
+        dict_of_parameters: dict[str, Any] = {
             "title": request.POST.get('title'),
             "is_completed": False,
             "is_important": request.POST.get('is_important') == 'on',
@@ -25,13 +25,13 @@ class IssueTrackerContext:
         }
         
         if request.POST.get('deadline') != "":
-            dict_of_parametrs["deadline"] = request.POST.get('deadline')
+            dict_of_parameters["deadline"] = request.POST.get('deadline')
         
         IssueTrackerContext.action_for_element(
             method=DataBaseObjectsProcessing.create_element,
             model=Task,
             user=request.user,
-            parametrs=dict_of_parametrs
+            parametrs=dict_of_parameters
         )
     
         ctx = IssueTrackerContext.get_context_for_index_page(request)
@@ -40,7 +40,7 @@ class IssueTrackerContext:
     @staticmethod
     @FunctionsUtils.register_function("add_task_section")
     def get_context_after_add_task_section(request: Any) -> dict[str, Any]:
-        dict_of_parametrs: dict[str, Any] = {
+        dict_of_parameters: dict[str, Any] = {
             "title": request.POST.get('title')
         }
 
@@ -48,7 +48,7 @@ class IssueTrackerContext:
             method=DataBaseObjectsProcessing.create_element,
             model=TaskSection,
             user=request.user,
-            parametrs=dict_of_parametrs
+            parametrs=dict_of_parameters
         )
         
         ctx = IssueTrackerContext.get_context_for_index_page(request)
@@ -95,16 +95,16 @@ class IssueTrackerContext:
         return ctx
 
     @staticmethod
-    def action_for_element(method: callable, model: Any, user: User, parametrs: str | dict[str, Any]) -> bool:
+    def action_for_element(method: callable, model: Any, user: User, parameters: str | dict[str, Any]) -> bool:
         """
         Производит действия добавления или удаления с элементами модели
 
         :param method: удалить или добавить
-        :param model: модель с которой производим действия
+        :param model: модель
         :param user: пользователь к которому прикреплены элементы модели
-        :param parametrs: параметры это id удаляемого элемента или параметры содаваемого элемента
+        :param parameters: параметры это id удаляемого элемента или параметры элемента
         :return: подтверждение об успешном действии
         """
-        method(model, user, parametrs)
+        method(model, user, parameters)
         return True
     

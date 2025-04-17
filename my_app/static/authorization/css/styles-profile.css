@@ -14,6 +14,11 @@ body {
     min-height: 100vh;
 }
 
+.buttons-container {
+    display: flex;
+    align-items: center;
+}
+
 .container {
     width: 800px;
     background-color: white;
@@ -43,6 +48,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: 20px; /* Небольшой отступ между кнопками */
 }
 
 .logout-button:hover {
@@ -86,4 +92,79 @@ body {
     margin-top: 20px;
     font-size: 14px;
     color: #777;
+}
+/* Кнопка с видом шестерёнки */
+.gear-button {
+  display: inline-flex;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px; /* Немного сдвинем вправо от заголовка */
+}
+
+.icon {
+  position: relative;
+  background: white; /* Белый фон */
+  height: 30px; /* Уменьшаем высоту */
+  width: 30px; /* Уменьшаем ширину */
+  border-radius: 50%; /* Круглая форма */
+  border: 2px solid #808080;
+  transition: transform 0.3s ease-in-out;
+}
+
+.icon:hover {
+  transform: rotate(90deg);
+}
+
+.hole { /* Новый класс для отверстия */
+  position: absolute;
+  z-index: 1; /* Расположим поверх всех элементов */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Центрирование */
+  width: 5px; /* Диаметр отверстия */
+  height: 5px;
+  background: white; /* Белое отверстие */
+  border-radius: 50%; /* Округлим форму */
+}
+
+.wheel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 10px; /* Размер центрального круга */
+  height: 10px;
+  background: transparent; /* Прозрачный центр */
+  border-radius: 50%;
+  border: solid 7px #808080; /* Толщина ободка */
+}
+
+.cog {
+  position: absolute;
+  width: 4px; /* Ширина зубца */
+  height: 21px; /* Высота зубца */
+  border-radius: 4px;
+  background: #808080; /* Цвет зубца */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.cog:nth-child(2) {
+  transform: rotate(45deg); /* Поворачиваем каждый зубец */
+}
+
+.cog:nth-child(3) {
+  transform: rotate(90deg);
+}
+
+.cog:nth-child(4) {
+  transform: rotate(135deg);
 }
