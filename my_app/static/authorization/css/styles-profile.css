@@ -93,6 +93,7 @@ body {
     font-size: 14px;
     color: #777;
 }
+
 /* Кнопка с видом шестерёнки */
 .gear-button {
   display: inline-flex;
@@ -101,14 +102,13 @@ body {
   background: none;
   cursor: pointer;
   outline: none;
-  margin-left: 10px; /* Немного сдвинем вправо от заголовка */
 }
 
 .icon {
   position: relative;
   background: white; /* Белый фон */
-  height: 30px; /* Уменьшаем высоту */
-  width: 30px; /* Уменьшаем ширину */
+  height: 40px; /* Уменьшаем высоту */
+  width: 40px; /* Уменьшаем ширину */
   border-radius: 50%; /* Круглая форма */
   border: 2px solid #808080;
   transition: transform 0.3s ease-in-out;
@@ -124,8 +124,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Центрирование */
-  width: 5px; /* Диаметр отверстия */
-  height: 5px;
+  width: 8px; /* Диаметр отверстия */
+  height: 8px;
   background: white; /* Белое отверстие */
   border-radius: 50%; /* Округлим форму */
 }
@@ -137,18 +137,19 @@ body {
   top: 0;
   bottom: 0;
   margin: auto;
-  width: 10px; /* Размер центрального круга */
-  height: 10px;
-  background: transparent; /* Прозрачный центр */
+  width: 23px; /* Размер центрального круга */
+  height: 23px;
+  background: white; /* Прозрачный центр */
   border-radius: 50%;
   border: solid 7px #808080; /* Толщина ободка */
+  transition: transform 0.3s ease-in-out;
 }
 
 .cog {
   position: absolute;
-  width: 4px; /* Ширина зубца */
-  height: 21px; /* Высота зубца */
-  border-radius: 4px;
+  width: 5px; /* Ширина зубца */
+  height: 30px; /* Высота зубца */
+  border-radius: 1px;
   background: #808080; /* Цвет зубца */
   top: 0;
   left: 0;

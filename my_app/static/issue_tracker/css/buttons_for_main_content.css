@@ -7,6 +7,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: 10px; /* Небольшой отступ между кнопками */
 }
 
 .logout-button:hover {

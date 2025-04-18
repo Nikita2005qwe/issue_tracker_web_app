@@ -13,15 +13,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/buttons_for_main_content.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/section_content.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/task_content.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/favorite_btn.css' %}">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/favorite_buttons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/filter_buttons.css' %}">
 </head>
 <body>
     <div class="container">
         <!-- Шапка -->
         <div class="header">
             <h1>Добро пожаловать, {{ user.username }}!</h1>
-            <button class="logout-button" onclick="location.href='{% url 'authorization:profile' %}'">Выйти</button>
+            <div class="buttons-container">
+                <button class="filter-button-main">
+                    <div class="arrow-up"></div>
+                    <div class="arrow-down"></div>
+                </button>
+                <button class="logout-button" onclick="location.href='{% url 'authorization:profile' %}'">Выйти</button>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Все задачи</button>
+            <button class="filter-btn" data-filter="active">Активные</button>
+            <button class="filter-btn" data-filter="completed">Выполненные</button>
+            <button class="filter-btn" data-filter="completed">Важные</button>
         </div>
 
         <!-- Кнопки добавления задачи и секции -->
@@ -46,5 +59,6 @@
 
     <script src="{% static 'issue_tracker/js/scripts.js' %}"></script>
     <script src="{% static 'issue_tracker/js/script_for_processing_overdue.js' %}"></script>
+    <script src="{% static 'issue_tracker/js/filtration_processing.js' %}"></script>
 </body>
 </html>

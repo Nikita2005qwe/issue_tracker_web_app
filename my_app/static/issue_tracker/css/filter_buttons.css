@@ -1,0 +1,123 @@
+/* Стили для навигации */
+.filters {
+    display: flex;
+    justify-content: left; /* Равномерное распределение кнопок */
+    gap: 10px; /* Расстояние между кнопками */
+    margin-bottom: 20px; /* Отступ снизу */
+    display: none; /* По умолчанию скрыт */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+.filter-btn {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #28a745; /* Зеленая рамка */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Плавные переходы */
+    height: 40px; /* Фиксированная высота */
+    font-size: 16px; /* Размер текста */
+    text-align: center; /* Выравнивание текста по центру */
+    line-height: 20px; /* Для выравнивания текста по вертикали */
+}
+
+.filter-btn:hover {
+    background-color: #218838;
+    border: 2px solid #218838; /* Зеленая рамка */
+}
+
+/* Активная кнопка */
+.filter-btn.active {
+    background-color: white;
+    color: #28a745;
+    border: 2px solid #28a745; /* Оставляем зеленую рамку для активной кнопки */
+}
+
+.task-row.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+}
+
+
+/* Основная кнопка фильтров */
+.filter-button-main {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: white; /* Белый фон */
+    border: 3px solid #808080; /* Серый контур */
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    scale: 70%;
+}
+
+.filter-button-main:hover {
+    background-color: #d3d3d3; /* Белый фон */
+}
+
+.arrow-up,
+.arrow-down {
+    position: relative;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    margin: 0px;
+}
+
+.arrow-up {
+    border-bottom-width: 12px;
+    border-left-width: 8px;
+    border-right-width: 8px;
+    border-bottom-color: gray; /* Серый цвет стрелки вверх */
+    bottom: 10px;
+}
+
+.arrow-down {
+    border-top-width: 12px;
+    border-left-width: 8px;
+    border-right-width: 8px;
+    border-top-color: gray; /* Серый цвет стрелки вниз */
+    top: 10px;
+}
+
+/* Добавляем хвостики стрелкам */
+.arrow-up::before,
+.arrow-down::before {
+    content: "";
+    position: absolute;
+    left: calc(50% - 2px); /* Центрирование относительно стрелки */
+    width: 4px;
+    height: 17px;
+    background-color: gray; /* Серый цвет линий */
+}
+
+
+.arrow-down::before {
+    bottom: 12px; /* Опускаемся ниже основной части стрелки вниз */
+}
+.arrow-up::before {
+    top: 12px;
+}
+
+/* Скрытые элементы */
+.hidden {
+    display: none;
+}
