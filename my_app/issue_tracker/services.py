@@ -31,7 +31,7 @@ class IssueTrackerContext:
             method=DataBaseObjectsProcessing.create_element,
             model=Task,
             user=request.user,
-            parametrs=dict_of_parameters
+            parameters=dict_of_parameters
         )
     
         ctx = IssueTrackerContext.get_context_for_index_page(request)
@@ -48,7 +48,7 @@ class IssueTrackerContext:
             method=DataBaseObjectsProcessing.create_element,
             model=TaskSection,
             user=request.user,
-            parametrs=dict_of_parameters
+            parameters=dict_of_parameters
         )
         
         ctx = IssueTrackerContext.get_context_for_index_page(request)
@@ -62,7 +62,7 @@ class IssueTrackerContext:
             method=DataBaseObjectsProcessing.delete_element,
             model=TaskSection,
             user=request.user,
-            parametrs=request.POST.get('section_id')
+            parameters=request.POST.get('section_id')
         )
     
         ctx = IssueTrackerContext.get_context_for_index_page(request)
@@ -76,7 +76,7 @@ class IssueTrackerContext:
             method=DataBaseObjectsProcessing.delete_element,
             model=Task,
             user=request.user,
-            parametrs=request.POST.get('task_id')
+            parameters=request.POST.get('task_id')
         )
         
         ctx = IssueTrackerContext.get_context_for_index_page(request)

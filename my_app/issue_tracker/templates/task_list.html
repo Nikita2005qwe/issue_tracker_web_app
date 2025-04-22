@@ -26,7 +26,13 @@
                 {% endif %}
             </div>
             <div class="task-actions">
-                <button class="complete-btn" data-task-id="{{ task.id }}">Выполнить</button>
+                 <button class="complete-btn {% if task.is_completed %}completed{% endif %}" data-task-id="{{ task.id }}">
+                     {% if task.is_completed %}
+                        Выполнено
+                     {% else %}
+                        Выполнить
+                     {% endif %}
+                 </button>
                 <button class="delete-btn" data-task-id="{{ task.id }}">Удалить</button>
             </div>
         </div>
