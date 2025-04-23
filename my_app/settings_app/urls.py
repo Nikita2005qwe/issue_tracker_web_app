@@ -1,8 +1,8 @@
 from django.urls import path
 from django.contrib import admin
 from rest_framework import routers
-from settings_app.services import SettingsAppContext
-from settings_app.views import SettingsAppPage
+from .services import SettingsAppContext
+from .views import SettingsAppPage
 from .api import UserSettingsViewSet
 
 

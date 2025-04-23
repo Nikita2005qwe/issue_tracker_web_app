@@ -1,5 +1,4 @@
-from settings_app.models import UserSettings
-from settings_app.services import SettingsAppContext
+from .services import SettingsAppContext
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 

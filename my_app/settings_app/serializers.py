@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from settings_app.models import UserSettings
+from .models import UserSettings
 
 
 class UserSettingsSerializer(serializers.ModelSerializer):

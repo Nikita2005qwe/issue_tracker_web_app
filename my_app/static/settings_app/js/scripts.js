@@ -1,3 +1,5 @@
+//Обработчик событий для переключения через кнопки навигации
+//между разделами в настройках
 document.addEventListener('DOMContentLoaded', function () {
     // Находим все кнопки навигации
     const navButtons = document.querySelectorAll('.nav-button');
@@ -22,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//Обработчик события нажатия на крести при закрытии уведомления о сохранении настроек
 document.addEventListener('DOMContentLoaded', function () {
     // Находим кнопку "крестик"
     const closeButton = document.querySelector('.success-message .close-button');
@@ -37,39 +40,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Функция для обновления конкретной настройки пользователя
 async function updateSetting(checkboxElement) {
-    const settingsId = document.getElementById('userSettings').getAttribute('data-user_settings-id');
-    const settingUrl = `/settings/api/update-setting/${settingsId}/`;
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    try {
+        // Получаем ID настроек из атрибута data-user_settings-id
+        const settingsId = document.getElementById('userSettings').getAttribute('data-user_settings-id');
+        const settingUrl = `/settings/api/update-setting/${settingsId}/`;
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    // Берём ID и текущее состояние чекбокса
-    const fieldName = checkboxElement.name;
-    const newValue = checkboxElement.checked;
-    console.log(settingsId);
-    console.log(fieldName);
-    console.log(newValue);
+        // Берём имя поля и текущее состояние чекбокса
+        const fieldName = checkboxElement.name;
+        const newValue = checkboxElement.value;
 
-    // Отправляем PATCH-запрос на сервер
-    fetch(settingUrl, {
-        method: 'PATCH', // Используем метод PATCH для частичного обновления
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken, // Добавляем CSRF-токен для безопасности
-        },
-        body: JSON.stringify({
-            fieldName: newValue, // Устанавливаем значение is_important
-        }),
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Ошибка при обновлении задачи');
-            }
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Данные успешно обновлены:', data);
+        console.log(`Updating field "${fieldName}" to ${newValue}`);
 
-        })
-        .catch((error) => {
-            console.error('Ошибка:', error);
+        // Формируем динамический объект для отправки
+        const requestBody = {};
+        if (newValue !== 'on') {
+            console.log(newValue);
+            requestBody[fieldName] = newValue;
+        } else {
+            console.log(newValue === 'on');
+            requestBody[fieldName] = newValue === 'on';
+        }
+
+        // Отправляем PATCH-запрос на сервер
+        const response = await fetch(settingUrl, {
+            method: 'PATCH', // Используем метод PATCH для частичного обновления
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken, // Добавляем CSRF-токен для безопасности
+            },
+            body: JSON.stringify(requestBody),
         });
+
+        // Проверяем статус ответа
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Ошибка при обновлении настроек');
+        }
+
+        // Получаем обновлённые данные
+        const data = await response.json();
+        console.log('Настройки успешно обновлены:', data);
+        document.querySelector(".success-message").style.display = 'block';
+
+    } catch (error) {
+        console.error('Ошибка при обновлении настроек:', error.message);
+        alert(`Не удалось обновить настройку: ${error.message}`);
+    }
 }
