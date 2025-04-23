@@ -11,7 +11,6 @@ class AuthorizationContext:
     """
     
     @staticmethod
-    @FunctionsUtils.register_function("index")
     def get_context_for_index_page() -> dict[str, Any]:
         
         ctx = {

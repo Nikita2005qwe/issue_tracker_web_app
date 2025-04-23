@@ -1,17 +1,12 @@
 from .models import Task
 from rest_framework import viewsets, permissions
-from rest_framework.permissions import IsAuthenticated, BasePermission
+from rest_framework.permissions import IsAuthenticated
 from .serializers import TaskSerializer
 from utils.DataBaseObjectsProcessing import DataBaseObjectsProcessing
-
-
-class IsOwner(BasePermission):
-    def has_object_permission(self, request, view, obj):
-        return obj.user == request.user
+from permissions.IsOwner import IsOwner
 
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = DataBaseObjectsProcessing.get_all_objects(Task)
     permission_classes = [
         IsAuthenticated,
         IsOwner,

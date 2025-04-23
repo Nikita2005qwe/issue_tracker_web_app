@@ -1,9 +1,13 @@
 from django.urls import path
-from authorization.views import RegisterView
-from utils.URLPatternBuilder import URLPatternBuilder
+from django.contrib.auth.views import LogoutView
+from authorization.views import RegisterView, IndexPage, ProfileView, CustomLogoutView
 
 
 app_name = 'authorization'
 
-urlpatterns = URLPatternBuilder.get_urls_patterns(app_name)
-urlpatterns.append(path('register', RegisterView.as_view(), name="register"))
+urlpatterns = [
+    path('', IndexPage.as_view(), name="index_page"),
+    path('register', RegisterView.as_view(), name="register"),
+    path('profile', ProfileView.as_view(), name="profile"),
+    path('logout', CustomLogoutView.as_view(), name='logout'),
+]

@@ -1,20 +1,17 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .forms import UserSettingsForm
-from .models import UserSettings
+from settings_app.models import UserSettings
+from settings_app.services import SettingsAppContext
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-@login_required
-def settings_view(request):
-    # Получаем или создаем настройки пользователя
-    user_settings, created = UserSettings.objects.get_or_create(user=request.user)
 
-    if request.method == 'POST':
-        form = UserSettingsForm(request.POST, instance=user_settings)
-        if form.is_valid():
-            form.save()
-            return redirect('settings')  # Перенаправляем обратно на страницу настроек
-    else:
-        form = UserSettingsForm(instance=user_settings)
+class SettingsAppPage(LoginRequiredMixin, TemplateView):
+    template_name = 'settings.html'
 
-    return render(request, 'settings_app/settings.html', {'form': form})
-
+    def get_context_data(self, **kwargs):
+        """
+        Добавляем дополнительные данные в контекст перед рендерингом шаблона.
+        """
+        context = super().get_context_data(**kwargs)
+        context.update(SettingsAppContext.get_context_for_index_page(self.request))
+        return context
+    

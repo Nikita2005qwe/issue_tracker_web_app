@@ -1,8 +1,17 @@
+from django.urls import path
 from django.contrib import admin
-from utils.URLPatternBuilder import URLPatternBuilder
-from .services import SettingsAppContext
+from rest_framework import routers
+from settings_app.services import SettingsAppContext
+from settings_app.views import SettingsAppPage
+from .api import UserSettingsViewSet
 
 
 app_name = 'settings_app'
 
-urlpatterns = URLPatternBuilder.get_urls_patterns(app_name)
+router = routers.DefaultRouter()
+router.register('api/update-setting', UserSettingsViewSet, "update-setting")
+
+urlpatterns = [
+    path('', SettingsAppPage.as_view(), name='main_settings_app'),
+]
+urlpatterns += router.urls
