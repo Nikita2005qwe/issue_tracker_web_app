@@ -184,3 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Получаем ID текущего пользователя из HTML (например, из тега <meta>)
+    const userId = document.querySelector('meta[name="user-id"]').getAttribute('content');
+
+    // Заполняем скрытое поле user_id
+    const userIdField = document.getElementById('userIdField');
+    if (userIdField) {
+        userIdField.value = userId;
+    }
+});

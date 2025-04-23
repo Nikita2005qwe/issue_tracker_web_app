@@ -19,8 +19,10 @@
                     <div class="inner-star {% if task.is_important %}important{% endif %}"></div>
                 </button>
                 <span>{{ task.title }}</span>
-                {% if task.deadline %}
-                    <span class="task-deadline">До: {{ task.deadline|date:"d.m.Y H:i" }}</span>
+                {% if task.deadline_date or task.deadline_time %}
+                    <span class="task-deadline" data-deadline="{{ task.get_deadline|date:'c' }}">
+                        До: {{ task.deadline_date|date:"d.m.Y" }} {% if task.deadline_time %}{{ task.deadline_time|time:"H:i" }}{% endif %}
+                    </span>
                 {% else %}
                     <span class="task-deadline">Срок не установлен</span>
                 {% endif %}

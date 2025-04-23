@@ -4,7 +4,7 @@
     <div class="modal-content">
         <h2>Вы уверены?</h2>
         <p>Вы действительно хотите удалить секцию "<span id="sectionTitleForDelete"></span>"?</p>
-        <form id="deleteSectionForm" method="post" action="{% url 'issue_tracker:delete_task_section' %}">
+        <form id="deleteSectionForm" method="post">
             {% csrf_token %}
             <input type="hidden" id="sectionIdInput" name="section_id" value="">
             <button type="submit" class="confirm-button">Удалить</button>
@@ -19,7 +19,7 @@
     <div class="modal-content">
         <h2>Вы уверены?</h2>
         <p>Вы действительно хотите удалить задачу "<span id="taskTitleForDelete"></span>"?</p>
-        <form id="deleteTaskForm" method="post" action="{% url 'issue_tracker:delete_task' %}">
+        <form id="deleteTaskForm" method="post">
             {% csrf_token %}
             <input type="hidden" id="taskIdInput" name="task_id" value="">
             <button type="submit" class="confirm-button">Удалить</button>

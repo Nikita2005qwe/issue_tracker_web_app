@@ -55,11 +55,9 @@ async function updateSetting(checkboxElement) {
         // Формируем динамический объект для отправки
         const requestBody = {};
         if (newValue !== 'on') {
-            console.log(newValue);
             requestBody[fieldName] = newValue;
         } else {
-            console.log(newValue === 'on');
-            requestBody[fieldName] = newValue === 'on';
+            requestBody[fieldName] = checkboxElement.checked;
         }
 
         // Отправляем PATCH-запрос на сервер

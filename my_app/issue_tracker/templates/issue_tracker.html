@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="user-id" content="{{ request.user.id }}">
     <title>Issue Tracker</title>
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/main_page.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/modal_styles.css' %}">
@@ -15,6 +16,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/task_content.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/favorite_buttons.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/filter_buttons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/date-picker.css' %}">
+
+    <!-- Подключение Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
     <div class="container">
@@ -57,9 +62,12 @@
          data-show-warn-on-task-section-delete="{{ user_settings.warn_on_task_section_delete }}"
     ></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <script src="{% static 'issue_tracker/js/scripts.js' %}"></script>
     <script src="{% static 'issue_tracker/js/script_for_processing_overdue.js' %}"></script>
     <script src="{% static 'issue_tracker/js/filtration_processing.js' %}"></script>
     <script src="{% static 'issue_tracker/js/click_on_btn_complete.js' %}"></script>
+    <script src="{% static 'issue_tracker/js/date-picker.js' %}"></script>
 </body>
 </html>

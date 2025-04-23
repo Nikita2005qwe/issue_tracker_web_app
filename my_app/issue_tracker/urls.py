@@ -1,9 +1,8 @@
 from django.urls import path
 from django.contrib import admin
 from rest_framework import routers
-from utils.URLPatternBuilder import URLPatternBuilder
-from .services import IssueTrackerContext
 from .api import TaskViewSet
+from .views import IndexView
 
 
 app_name = 'issue_tracker'
@@ -11,5 +10,8 @@ app_name = 'issue_tracker'
 router = routers.DefaultRouter()
 router.register('api/task', TaskViewSet, "task")
 
-urlpatterns = URLPatternBuilder.get_urls_patterns(app_name)
+urlpatterns = [
+    path("main", IndexView.as_view(), name="main"),
+]
+
 urlpatterns += router.urls
