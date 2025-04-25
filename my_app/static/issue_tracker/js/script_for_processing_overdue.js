@@ -1,18 +1,35 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const taskRows = document.querySelectorAll('.task-row');
+    const taskDeadlines = document.querySelectorAll('.task-deadline');
 
-    taskRows.forEach(row => {
-        const deadlineElement = row.querySelector('.task-deadline');
-        const deadlineText = deadlineElement.textContent.trim();
+    taskDeadlines.forEach(deadlineElement => {
+        const deadlineISO = deadlineElement.getAttribute('data-deadline');
 
-        // Если есть дата, проверяем, не просрочена ли она
-        if (!deadlineText.includes('Срок не установлен')) {
-            const deadlineDate = new Date(deadlineText.replace('До: ', '').replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1'));
-            const currentDate = new Date();
+        if (!deadlineISO) return; // Если срок не установлен, ничего не делаем
 
-            if (currentDate > deadlineDate) {
-                deadlineElement.classList.add('overdue');
+        const deadlineDate = new Date(deadlineISO);
+        const currentDate = new Date();
+
+        if (currentDate > deadlineDate) {
+            // Просрочено
+            deadlineElement.classList.add('overdue');
+            deadlineElement.textContent = 'Просрочено';
+        } else {
+            // Рассчитываем оставшееся время
+            const diffMs = deadlineDate - currentDate;
+            const diffMinutes = Math.floor(diffMs / (1000 * 60));
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+            let remainingText = '';
+            if (diffMinutes < 60) {
+                remainingText = `${diffMinutes} мин.`;
+            } else if (diffHours < 24) {
+                remainingText = `${diffHours} ч.`;
+            } else {
+                remainingText = `до ${deadlineDate.toLocaleDateString()}`;
             }
+
+            deadlineElement.textContent = `Осталось: ${remainingText}`;
         }
     });
 });

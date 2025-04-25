@@ -5,8 +5,11 @@
         <h2>Добавить задачу</h2>
         <button type="button" id="cancelAddTaskButton" class="cancel-button"></button>
 
-        <form id="addTaskForm" method="post" action="{% url 'issue_tracker:add_task' %}">
+        <form id="addTaskForm" method="post">
             {% csrf_token %}
+
+            <!-- Скрытое поле для user_id -->
+            <input type="hidden" id="userIdField" name="user_id">
 
             <label for="taskTitleForAdd">Название задачи</label>
             <input type="text" id="taskTitleForAdd" name="title" required>
@@ -15,7 +18,6 @@
                 <input type="checkbox" id="isImportant" name="is_important"> Важная задача
             </label>
 
-            <label for="sectionSelect">Секция</label>
             <select id="sectionSelect" name="section_id" required>
                 <option value="">Выберите секцию</option>
                 {% for section in sections %}
@@ -23,8 +25,9 @@
                 {% endfor %}
             </select>
 
-            <label for="taskDeadline">Крайний срок выполнения</label>
-            <input type="datetime-local" id="taskDeadline" name="deadline">
+            <label for="taskDeadlineDate">Крайний срок выполнения</label>
+            <input type="date" id="taskDeadlineDate" name="deadline_date">
+            <input type="time" id="taskDeadlineTime" name="deadline_time">
 
             <button type="submit" class="confirm-button">Добавить</button>
         </form>
@@ -36,7 +39,7 @@
     <div class="overlay" style="display: block;"></div>
     <div class="modal-content">
         <h2>Добавить секцию</h2>
-        <form id="addTaskSectionForm" method="post" action="{% url 'issue_tracker:add_task_section' %}">
+        <form id="addTaskSectionForm" method="post">
             {% csrf_token %}
 
             <label for="taskSectionTitleForAdd">Название секции:</label>

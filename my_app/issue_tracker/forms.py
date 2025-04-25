@@ -1,12 +1,15 @@
 from django import forms
-from issue_tracker.models import Task, TaskSection
+from .models import Task, TaskSection
 
 
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'is_important', 'section_id']
-        
+        widgets = {
+            'deadline_date': forms.DateInput(attrs={'type': 'date'}),
+            'deadline_time': forms.TimeInput(attrs={'type': 'time'}),
+        }
     
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)  # Извлекаем объект request

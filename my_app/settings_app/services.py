@@ -1,5 +1,4 @@
 from typing import Any
-from django.contrib.auth.models import User
 from utils.FunctionsUtils import FunctionsUtils
 from utils.DataBaseObjectsProcessing import DataBaseObjectsProcessing
 from .models import UserSettings
@@ -8,10 +7,12 @@ from .models import UserSettings
 class SettingsAppContext:
     @staticmethod
     def get_context_for_index_page(request: Any) -> dict[str, Any]:
+        user_settings = DataBaseObjectsProcessing.get_objects_owned_by_user(UserSettings, request.user)[0]
         ctx = {
             'title': Messages.get_title(),
             "save_message": Messages.get_save_message(),
-            'user_settings': DataBaseObjectsProcessing.get_objects_owned_by_user(UserSettings, request.user)[0]
+            'user_settings': user_settings,
+            'current_theme': user_settings.theme,
         }
         
         return ctx

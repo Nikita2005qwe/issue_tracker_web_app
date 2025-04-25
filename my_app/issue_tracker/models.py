@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+import datetime
 
 
 class TaskSection(models.Model):
@@ -24,11 +25,20 @@ class Task(models.Model):
 
     # Временные поля
     time_created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    deadline = models.DateTimeField(null=True, blank=True, verbose_name='Крайний срок выполнения')
+    deadline_date = models.DateField(blank=True, null=True, verbose_name='Крайний срок выполнения задачи')
+    deadline_time = models.TimeField(blank=True, null=True, verbose_name='Крайнее время выполнения задачи')
 
     # Связь с пользователем
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks', verbose_name='Пользователь')
-    
+
+    def get_deadline(self):
+        """Возвращает полную дату и время крайнего срока."""
+        if self.deadline_date and self.deadline_time:
+            return datetime.datetime.combine(self.deadline_date, self.deadline_time)
+        elif self.deadline_date:
+            return datetime.datetime.combine(self.deadline_date, datetime.time.min)
+        return None
+
     def __str__(self):
         return f"Задача {self.title} для пользователя {self.user}"
     

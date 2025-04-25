@@ -65,7 +65,7 @@
                        id="EmailNotifications"
                        name="email_notifications"
                        {% if user_settings.email_notifications %}checked{% endif %}
-                       onchange=""
+                       onchange="updateSetting(this)"
                 >
                 <label class="form-check-label" for="EmailNotifications">Отправлять email-уведомления</label>
             </div>
@@ -75,14 +75,36 @@
         <div id="theme" class="setting-group" style="display: none;">
             <h3>Тема приложения</h3>
             <div class="checkbox-item">
-                <input
-                       type="checkbox"
-                       id="DarkTheme"
-                       name="dark_theme"
-                       {% if user_settings.dark_theme %}checked{% endif %}
-                       onchange=""
-                >
-                <label class="form-check-label" for="DarkTheme">Темная тема</label>
+                <label>
+                    <input
+                        type="radio"
+                        name="theme"
+                        value="light"
+                        onchange="updateSetting(this)"
+                        {% if current_theme == 'light' %}checked{% endif %}
+                    >
+                    Светлая тема
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="theme"
+                        value="dark"
+                        onchange="updateSetting(this)"
+                        {% if current_theme == 'dark' %}checked{% endif %}
+                    >
+                    Тёмная тема
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="theme"
+                        value="custom"
+                        onchange="updateSetting(this)"
+                        {% if current_theme == 'custom' %}checked{% endif %}
+                    >
+                    Персонализированная тема
+                </label>
             </div>
         </div>
 
