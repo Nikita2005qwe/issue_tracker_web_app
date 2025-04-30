@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token }}">
     <meta name="user-id" content="{{ request.user.id }}">
-    <title>Issue Tracker</title>
+    <title>План задач</title>
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/main_page.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/modal_styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/delete_section_btn.css' %}">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/favorite_buttons.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/filter_buttons.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'issue_tracker/css/date-picker.css' %}">
+    <link id="theme-style" rel="stylesheet" href="{% static 'css/'|add:user_settings.theme|add:'-theme.css' %}">
 
     <!-- Подключение Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

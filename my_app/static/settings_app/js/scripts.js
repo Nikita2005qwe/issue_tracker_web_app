@@ -79,6 +79,9 @@ async function updateSetting(checkboxElement) {
         // Получаем обновлённые данные
         const data = await response.json();
         console.log('Настройки успешно обновлены:', data);
+
+        // Обновляем тему на клиентской стороне
+        document.getElementById('theme-style').href = `/static/css/${data.theme}-theme.css`;
         document.querySelector(".success-message").style.display = 'block';
 
     } catch (error) {

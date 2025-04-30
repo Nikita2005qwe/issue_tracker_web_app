@@ -1,0 +1,50 @@
+/* light-theme.css */
+body {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.add-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.add-button:hover {
+    background-color: #45a049;
+}
+
+.filter-btn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.filter-btn.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.section-header h2 {
+    color: #4CAF50;
+}
+
+.task-row {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}
+
+.task-row:hover {
+    background-color: #f0f0f0;
+}
+
+.task-actions button {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.task-actions button:hover {
+    background-color: #e53935;
+}
+
+.favorite-btn .inner-star {
+    color: gold;
+}
