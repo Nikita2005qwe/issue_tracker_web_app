@@ -1,9 +1,9 @@
 <!-- Модальное окно для добавления задач -->
 <div id="addTaskModal" class="modal" style="display: none;">
-    <div class="overlay" style="display: block;"></div>
+    <div class="overlay"></div>
     <div class="modal-content">
         <h2>Добавить задачу</h2>
-        <button type="button" id="cancelAddTaskButton" class="cancel-button"></button>
+        <button type="button" id="cancelAddTaskButton" class="cancel-button" onclick="closeModal(this.closest('.modal'))"></button>
 
         <form id="addTaskForm" method="post">
             {% csrf_token %}
@@ -36,9 +36,11 @@
 
 <!-- Модальное окно для добавления секций -->
 <div id="addTaskSectionModal" class="modal" style="display: none;">
-    <div class="overlay" style="display: block;"></div>
+    <div class="overlay"></div>
     <div class="modal-content">
         <h2>Добавить секцию</h2>
+        <button type="button" id="cancelAddTaskSectionButton" class="cancel-button" onclick="closeModal(this.closest('.modal'))"></button>
+
         <form id="addTaskSectionForm" method="post">
             {% csrf_token %}
 
@@ -48,7 +50,6 @@
             <input type="text" id="taskSectionTitleForAdd" name="title" required>
 
             <button type="submit" class="confirm-button">Добавить</button>
-            <button type="button" id="cancelAddTaskSectionButton" class="cancel-button"></button>
         </form>
     </div>
 </div>

@@ -4,10 +4,10 @@
     <div class="modal-content">
         <h2>Вы уверены?</h2>
         <p>Вы действительно хотите удалить секцию "<span id="sectionTitleForDelete"></span>"?</p>
-        <form id="deleteSectionForm" method="post">
+        <form id="deleteSectionForm">
             {% csrf_token %}
             <input type="hidden" id="sectionIdInput" name="section_id" value="">
-            <button type="submit" class="confirm-button">Удалить</button>
+            <button type="button" class="confirm-button">Удалить</button>
             <button type="button" id="cancelDeleteSectionButton" class="cancel-button"></button>
         </form>
     </div>
@@ -19,10 +19,10 @@
     <div class="modal-content">
         <h2>Вы уверены?</h2>
         <p>Вы действительно хотите удалить задачу "<span id="taskTitleForDelete"></span>"?</p>
-        <form id="deleteTaskForm" method="post">
+        <form id="deleteTaskForm">
             {% csrf_token %}
             <input type="hidden" id="taskIdInput" name="task_id" value="">
-            <button type="submit" class="confirm-button">Удалить</button>
+            <button type="button" class="confirm-button">Удалить</button>
             <button type="button" id="cancelDeleteButton" class="cancel-button"></button>
         </form>
     </div>

@@ -60,7 +60,7 @@ class DataBaseObjectsProcessing:
         Позволяет добавить новый элемент в базу данных.
         Работает для моделей, которые имеют поле user.
         
-        :param dict_of_parametrs: параеметры элемента
+        :param dict_of_parametrs: Параметры элемента
         :param model_class: Класс модели Django.
         :param user: Пользователь, который привязан к создаваемому объекту.
         :param dict_of_parametrs: Ключевые аргументы, содержащие поля и значения для нового элемента.

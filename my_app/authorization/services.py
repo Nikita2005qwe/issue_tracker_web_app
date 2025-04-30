@@ -1,7 +1,6 @@
 from issue_tracker.models import TaskSection
 from settings_app.models import UserSettings
 from typing import Any
-from utils.FunctionsUtils import FunctionsUtils
 from utils.DataBaseObjectsProcessing import DataBaseObjectsProcessing
 
 

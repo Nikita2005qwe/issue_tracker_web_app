@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from .services import IssueTrackerContext
 
@@ -24,4 +25,4 @@ class IndexView(TemplateView):
             'message': 'POST-запрос успешно обработан',
             'received_data': request.POST.dict(),
         }
-        return JsonResponse(data)
+        return render(request, IndexView.template_name, IndexView.get_context_data(self))
