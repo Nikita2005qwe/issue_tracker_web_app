@@ -42,6 +42,8 @@
         <form id="addTaskSectionForm" method="post">
             {% csrf_token %}
 
+            <input type="hidden" name="user_id">
+
             <label for="taskSectionTitleForAdd">Название секции:</label>
             <input type="text" id="taskSectionTitleForAdd" name="title" required>
 

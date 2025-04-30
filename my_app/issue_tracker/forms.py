@@ -26,15 +26,16 @@ class TaskForm(forms.ModelForm):
 class SectionForm(forms.ModelForm):
     class Meta:
         model = TaskSection
-        fields = ['title']  # Только одно поле для названия секции
+        fields = ['title']
     
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)  # Извлекаем объект request
+        self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
     
     def save(self, commit=True):
         instance = super().save(commit=False)
-        instance.user = self.request.user  # Используем текущего пользователя
+        instance.user = self.request.user
         if commit:
             instance.save()
         return instance
+    

@@ -1,7 +1,5 @@
 // Функция для добавления новой задачи через API
 function addTask() {
-    console.log('Начало выполнения функции addTask'); // Лог: начало выполнения
-
     const form = document.getElementById('addTaskForm');
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const formData = new FormData(form);
@@ -13,9 +11,8 @@ function addTask() {
         deadline_date: formData.get('deadline_date') || null,
         deadline_time: formData.get('deadline_time') || null,
         user_id: formData.get('user_id'),
+        is_important: formData.get('is_important') === 'on', // Преобразуем чекбокс в булево значение
     };
-
-    console.log('Сформированные данные для отправки:', taskData); // Лог: собранные данные
 
     // URL для добавления задачи
     const url = '/issue_tracker/api/task/';
@@ -39,11 +36,9 @@ function addTask() {
         })
         .then((data) => {
             console.log('Задача успешно добавлена:', data); // Лог: успешное добавление
-
             // Очищаем форму и закрываем модальное окно
             form.reset();
             closeModal(document.getElementById('addTaskModal'));
-
             // Добавляем новую задачу в интерфейс
             addTaskToUI(data);
         })
@@ -53,15 +48,13 @@ function addTask() {
         });
 }
 
-
 // Обработчик отправки формы
 document.getElementById('addTaskForm').addEventListener('submit', function (event) {
     event.preventDefault(); // Предотвращаем стандартную отправку формы
-    console.log('Форма отправлена, вызывается функция addTask'); // Лог: отправка формы
     addTask(); // Вызываем функцию для добавления задачи
 });
 
-
+// Функция для добавления задачи в интерфейс
 function addTaskToUI(task) {
     // Находим контейнер задач для соответствующей секции
     const sectionContainer = document.querySelector(`.section[data-section-id="${task.section_id}"] .tasks-container`);
@@ -74,7 +67,6 @@ function addTaskToUI(task) {
     const newTask = document.createElement('div');
     newTask.classList.add('task-row');
     newTask.setAttribute('data-task-id', task.id);
-
     newTask.innerHTML = `
         <div class="task-content">
             <button class="favorite-btn" data-task-id="${task.id}">
@@ -97,4 +89,40 @@ function addTaskToUI(task) {
 
     // Добавляем новую задачу в начало списка задач секции
     sectionContainer.prepend(newTask);
+
+    // Назначаем обработчики событий для кнопок "Важное"
+    const favoriteButton = newTask.querySelector('.favorite-btn');
+    favoriteButton.addEventListener('click', (event) => {
+        const taskId = favoriteButton.getAttribute('data-task-id'); // Получаем ID задачи
+        toggleIsImportant(taskId);
+    });
+
+    // Назначаем обработчики событий для кнопок "Удалить"
+    const deleteButton = newTask.querySelector('.delete-btn');
+    deleteButton.addEventListener('click', function () {
+        const taskId = this.getAttribute('data-task-id'); // Получаем ID задачи
+        const taskRow = document.querySelector(`.task-row[data-task-id="${taskId}"]`); // Находим строку задачи
+        const taskContent = taskRow.querySelector('.task-content span');
+        if (!taskContent) {
+            console.error('Элемент с названием задачи не найден');
+            return;
+        }
+        const taskName = taskContent.textContent;
+        // Устанавливаем ID задачи в скрытое поле формы
+        taskIdInput.value = taskId;
+        // Проверяем значение isActiveBooleanSWOTaskD
+        if (isActiveBooleanSWOTaskD) {
+            // Если true, показываем модальное окно
+            taskTitleForDelete.textContent = taskName; // Устанавливаем название задачи в модальное окно
+            openModal(deleteModal);
+            // Обработчик подтверждения удаления
+            document.querySelector('.confirm-button').addEventListener('click', function () {
+                closeModal(deleteModal); // Закрываем модальное окно
+                deleteTask(taskId); // Удаляем задачу
+            });
+        } else {
+            // Если false, отправляем форму автоматически
+            deleteTask(taskId);
+        }
+    });
 }
